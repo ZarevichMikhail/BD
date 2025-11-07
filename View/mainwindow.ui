@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>labdatabase</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="action_Exit"/>
+    <addaction name="action_Info"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>Справочники</string>
+    </property>
+    <addaction name="action_Posts"/>
+    <addaction name="action_Workers"/>
+    <addaction name="action_4"/>
+    <addaction name="action_Payments"/>
+    <addaction name="action_StudentsList"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_Exit">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Выход</string>
+   </property>
+  </action>
+  <action name="action_Posts">
+   <property name="text">
+    <string>Должности</string>
+   </property>
+  </action>
+  <action name="action_Workers">
+   <property name="text">
+    <string>Сотрудники</string>
+   </property>
+  </action>
+  <action name="action_4">
+   <property name="text">
+    <string>Абитуриенты</string>
+   </property>
+  </action>
+  <action name="action_Payments">
+   <property name="text">
+    <string>Договоры</string>
+   </property>
+  </action>
+  <action name="action_StudentsList">
+   <property name="text">
+    <string>Приказы</string>
+   </property>
+  </action>
+  <action name="action_Info">
+   <property name="text">
+    <string>О программе</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

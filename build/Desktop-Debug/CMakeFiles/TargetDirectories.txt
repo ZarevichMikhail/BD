@@ -1,0 +1,9 @@
+/home/zarevichmikhail/QtProjects/BD/build/Desktop-Debug/CMakeFiles/BD.dir
+/home/zarevichmikhail/QtProjects/BD/build/Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/zarevichmikhail/QtProjects/BD/build/Desktop-Debug/CMakeFiles/rebuild_cache.dir
+/home/zarevichmikhail/QtProjects/BD/build/Desktop-Debug/CMakeFiles/list_install_components.dir
+/home/zarevichmikhail/QtProjects/BD/build/Desktop-Debug/CMakeFiles/install.dir
+/home/zarevichmikhail/QtProjects/BD/build/Desktop-Debug/CMakeFiles/install/local.dir
+/home/zarevichmikhail/QtProjects/BD/build/Desktop-Debug/CMakeFiles/install/strip.dir
+/home/zarevichmikhail/QtProjects/BD/build/Desktop-Debug/CMakeFiles/BD_autogen_timestamp_deps.dir
+/home/zarevichmikhail/QtProjects/BD/build/Desktop-Debug/CMakeFiles/BD_autogen.dir
