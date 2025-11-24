@@ -1,5 +1,6 @@
 /home/zarevichmikhail/QtProjects/BD/build/Desktop-Debug/BD_autogen/WB4RFHLAU6/moc_workerstableform.cpp: /home/zarevichmikhail/QtProjects/BD/View/workerstableform.h \
   /home/zarevichmikhail/QtProjects/BD/build/Desktop-Debug/BD_autogen/moc_predefs.h \
+  /home/zarevichmikhail/QtProjects/BD/View/posttableform.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \

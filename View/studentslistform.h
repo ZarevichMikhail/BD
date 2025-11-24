@@ -44,6 +44,11 @@ private slots:
     void on_DeleteRowButton_clicked();
 
 
+
+
+
+
+
 protected:
     void closeEvent(QCloseEvent *event);
 
@@ -51,7 +56,10 @@ private:
     Ui::StudentsListForm *ui;
 
     //QSqlTableModel *model;
+
     QSqlRelationalTableModel *model;
+    QSqlTableModel *detailModel;
+
 
     static StudentsListForm *StudentsForm;
 

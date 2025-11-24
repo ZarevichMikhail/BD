@@ -28,6 +28,13 @@ public:
     // Функция, показывающая окно
     void ShowForm();
 
+    Ui::PostTable *ui;
+    Ui::PostTable *PostTableUi;
+
+    static PostTable *PostForm;
+
+
+
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -37,12 +44,35 @@ private slots:
 
     void on_DeleteButton_clicked();
 
+    // Мой слот для 3 лабы
+    // Он будет принимать два индекса:
+    // 'current' (новая выбранная строка) и 'previous' (старая)
+    void updateDetailView(const QModelIndex &current, const QModelIndex &previous);
+
+
+    void on_SearchButton_clicked();
+
+    void on_ResetSearchButton_clicked();
+
+    void on_SelectPostButton_clicked();
+
 private:
-    Ui::PostTable *ui;
+
 
     QSqlTableModel *model;
 
-    static PostTable *PostForm;
+    QSqlTableModel *detailModel;
+
+
+
+signals:
+    // Сигнал, который будет отправляться при выборе должности
+    // Хранит ID новой должности
+    void postSelected(int postId);
+
+
+
+
 };
 
 #endif // POSTTABLEFORM_H

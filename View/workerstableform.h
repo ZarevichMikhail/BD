@@ -21,6 +21,10 @@
 
 
 
+
+#include "View/posttableform.h"
+
+
 namespace Ui {
 class WorkersTableForm;
 }
@@ -36,6 +40,12 @@ public:
     static WorkersTableForm *CreateWindow();
     void ShowForm();
 
+    Ui::PostTable *PostTableUi;
+
+    static int selectedPostId;
+
+
+
 
 
 protected:
@@ -48,6 +58,23 @@ private slots:
 
     void on_DeleteRowButton_clicked();
 
+    void updateDetailView(const QModelIndex &current, const QModelIndex &previous);
+
+    void on_SearchButton_clicked();
+
+    void on_ResetButton_clicked();
+
+    void on_ChangePostButton_clicked();
+
+
+    // Новый слот, который сработает, когда должность выбрана
+    void onPostSelected(int postId);
+
+
+
+
+
+
 
 
 
@@ -56,6 +83,10 @@ private:
 
     //QSqlTableModel *model;
     QSqlRelationalTableModel *model;
+
+    QSqlTableModel *ApplicantsDetailModel;
+    QSqlTableModel *PaymentsDetailModel;
+    QSqlTableModel *StudentsDetailModel;
 
     static WorkersTableForm *WorkersForm;
 };

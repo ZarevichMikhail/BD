@@ -26,25 +26,52 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 namespace {
 struct qt_meta_stringdata_PostTable_t {
-    uint offsetsAndSizes[8];
+    uint offsetsAndSizes[26];
     char stringdata0[10];
-    char stringdata1[24];
+    char stringdata1[13];
     char stringdata2[1];
-    char stringdata3[24];
+    char stringdata3[7];
+    char stringdata4[24];
+    char stringdata5[24];
+    char stringdata6[17];
+    char stringdata7[12];
+    char stringdata8[8];
+    char stringdata9[9];
+    char stringdata10[24];
+    char stringdata11[29];
+    char stringdata12[28];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_PostTable_t::offsetsAndSizes) + ofs), len 
 Q_CONSTINIT static const qt_meta_stringdata_PostTable_t qt_meta_stringdata_PostTable = {
     {
         QT_MOC_LITERAL(0, 9),  // "PostTable"
-        QT_MOC_LITERAL(10, 23),  // "on_AddRowButton_clicked"
-        QT_MOC_LITERAL(34, 0),  // ""
-        QT_MOC_LITERAL(35, 23)   // "on_DeleteButton_clicked"
+        QT_MOC_LITERAL(10, 12),  // "postSelected"
+        QT_MOC_LITERAL(23, 0),  // ""
+        QT_MOC_LITERAL(24, 6),  // "postId"
+        QT_MOC_LITERAL(31, 23),  // "on_AddRowButton_clicked"
+        QT_MOC_LITERAL(55, 23),  // "on_DeleteButton_clicked"
+        QT_MOC_LITERAL(79, 16),  // "updateDetailView"
+        QT_MOC_LITERAL(96, 11),  // "QModelIndex"
+        QT_MOC_LITERAL(108, 7),  // "current"
+        QT_MOC_LITERAL(116, 8),  // "previous"
+        QT_MOC_LITERAL(125, 23),  // "on_SearchButton_clicked"
+        QT_MOC_LITERAL(149, 28),  // "on_ResetSearchButton_clicked"
+        QT_MOC_LITERAL(178, 27)   // "on_SelectPostButton_clicked"
     },
     "PostTable",
-    "on_AddRowButton_clicked",
+    "postSelected",
     "",
-    "on_DeleteButton_clicked"
+    "postId",
+    "on_AddRowButton_clicked",
+    "on_DeleteButton_clicked",
+    "updateDetailView",
+    "QModelIndex",
+    "current",
+    "previous",
+    "on_SearchButton_clicked",
+    "on_ResetSearchButton_clicked",
+    "on_SelectPostButton_clicked"
 };
 #undef QT_MOC_LITERAL
 } // unnamed namespace
@@ -55,18 +82,32 @@ Q_CONSTINIT static const uint qt_meta_data_PostTable[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    1,   56,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   26,    2, 0x08,    1 /* Private */,
-       3,    0,   27,    2, 0x08,    2 /* Private */,
+       4,    0,   59,    2, 0x08,    3 /* Private */,
+       5,    0,   60,    2, 0x08,    4 /* Private */,
+       6,    2,   61,    2, 0x08,    5 /* Private */,
+      10,    0,   66,    2, 0x08,    8 /* Private */,
+      11,    0,   67,    2, 0x08,    9 /* Private */,
+      12,    0,   68,    2, 0x08,   10 /* Private */,
+
+ // signals: parameters
+    QMetaType::Void, QMetaType::Int,    3,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 7, 0x80000000 | 7,    8,    9,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -82,9 +123,22 @@ Q_CONSTINIT const QMetaObject PostTable::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_PostTable_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<PostTable, std::true_type>,
+        // method 'postSelected'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'on_AddRowButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_DeleteButton_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'updateDetailView'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>,
+        // method 'on_SearchButton_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_ResetSearchButton_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_SelectPostButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -96,12 +150,25 @@ void PostTable::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         auto *_t = static_cast<PostTable *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->on_AddRowButton_clicked(); break;
-        case 1: _t->on_DeleteButton_clicked(); break;
+        case 0: _t->postSelected((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 1: _t->on_AddRowButton_clicked(); break;
+        case 2: _t->on_DeleteButton_clicked(); break;
+        case 3: _t->updateDetailView((*reinterpret_cast< std::add_pointer_t<QModelIndex>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QModelIndex>>(_a[2]))); break;
+        case 4: _t->on_SearchButton_clicked(); break;
+        case 5: _t->on_ResetSearchButton_clicked(); break;
+        case 6: _t->on_SelectPostButton_clicked(); break;
         default: ;
         }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        {
+            using _t = void (PostTable::*)(int );
+            if (_t _q_method = &PostTable::postSelected; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 0;
+                return;
+            }
+        }
     }
-    (void)_a;
 }
 
 const QMetaObject *PostTable::metaObject() const
@@ -123,15 +190,22 @@ int PostTable::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 7)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 7;
     }
     return _id;
+}
+
+// SIGNAL 0
+void PostTable::postSelected(int _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

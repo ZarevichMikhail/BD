@@ -23,6 +23,7 @@ ApplicantsTableForm::ApplicantsTableForm(QWidget *parent)
     // "public" - это схема в PostgreSQL, "Должности" - имя таблицы.
     // Кавычки нужны, т.к. имя на русском
     model->setTable("public.\"Абитуриенты\"");
+    //model->setTable("public.\"V_Абитуриенты_Конкусный_балл\""); // СТАЛО
     // Populates the model with data from the table that was set via setTable()
     model->select();
 

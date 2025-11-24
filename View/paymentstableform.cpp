@@ -88,22 +88,25 @@ void PaymentsTableForm::ShowForm()
 void PaymentsTableForm::on_PrevButton_clicked()
 {
     if (currentRow -1 >= 0) {
-        ShowRecord(currentRow - 1);
+        currentRow--;
+        ShowRecord(currentRow);
     }
 }
 
 
 void PaymentsTableForm::on_NextButton_clicked()
 {
-    if (currentRow + 1 < model->rowCount()) {
-        ShowRecord(currentRow + 1);
+    if (currentRow + 1 <= model->rowCount()) {
+        currentRow++;
+        ShowRecord(currentRow);
     }
 }
 
 
 void PaymentsTableForm::on_AddRowButton_clicked()
 {
-    model->insertRow(model->rowCount()+1);
+    model->insertRow(model->rowCount());
+    currentRow = model->rowCount();
     ShowRecord(model->rowCount());
 }
 
@@ -111,17 +114,23 @@ void PaymentsTableForm::on_AddRowButton_clicked()
 void PaymentsTableForm::on_RemoveRowButton_clicked()
 {
     // Получаем индекс текущей выделенной ячейки
-    int currentRow = currentRow;
+    //int currentRow = currentRow;
 
     // Проверяем, что какая-то строка выбрана
     if (currentRow >= 0) {
         // Говорим модели удалить эту строку
         model->removeRow(currentRow);
+        currentRow--;
     }
 
-    if (currentRow - 1 < model->rowCount()) {
-        ShowRecord(currentRow - 1);
+    // if (currentRow - 1 < model->rowCount()) {
+    //     ShowRecord(currentRow - 1);
+    // }
+    if (currentRow > 0) {
+        currentRow--;
     }
+
+    ShowRecord(currentRow);
 
 }
 
@@ -146,18 +155,29 @@ void PaymentsTableForm::closeEvent(QCloseEvent *event)
 
 void PaymentsTableForm::on_SaveRowButton_clicked()
 {
-    // Получаем индекс текущей выделенной ячейки
-    int currentRow = currentRow;
-
 
     QSqlRecord record = model->record(currentRow);
 
     // Обновляет данные новой строки
-    record.value("ИД сотрудника").toString() = ui->WorkerIdTextBox->text();
-    record.value("Человек, который будет оплачивать").toString() = ui->WorkerIdTextBox->text();
-    record.value("Кафедра").toString() = ui->DepartmentTextBox->text();
-    record.value("Направление подготовки").toString() = ui->ProfessionTextBox->text();
+    // record.value("ИД сотрудника").toString() = ui->WorkerIdTextBox->text();
+    // record.value("Человек, который будет оплачивать").toString() = ui->WorkerIdTextBox->text();
+    // record.value("Кафедра").toString() = ui->DepartmentTextBox->text();
+    // record.value("Направление подготовки").toString() = ui->ProfessionTextBox->text();
 
+    // 2. Устанавливаем новые значения В ОБЪЕКТ record
+    //    Используем setValue()
+    //    ВНИМАНИЕ: Нужно преобразовывать типы! "ИД сотрудника" - это число.
+    record.setValue("ИД сотрудника", ui->WorkerIdTextBox->text().toInt());
+
+    // У вас здесь была ошибка: вы снова брали текст из WorkerIdTextBox
+    record.setValue("Человек, который будет оплачивать", ui->ParentTextBox->text());
+
+    record.setValue("Кафедра", ui->DepartmentTextBox->text());
+    record.setValue("Направление подготовки", ui->ProfessionTextBox->text());
+
+    // 3. УСТАНАВЛИВАЕМ ИЗМЕНЕННУЮ ЗАПИСЬ ОБРАТНО В МОДЕЛЬ
+    //    Это самый важный шаг, который вы пропустили.
+    model->setRecord(currentRow, record);
 
     if (model->submitAll()) {
 
