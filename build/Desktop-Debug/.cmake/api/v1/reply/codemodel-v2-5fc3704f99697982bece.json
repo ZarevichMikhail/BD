@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-a8e7c130dedd1ad369e9.json",
+					"jsonFile" : "directory-.-Debug-704de0c0e7ca8ebd42ba.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.16"
@@ -44,7 +44,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "BD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-BD-Debug-4d3281a5bdac0e0e2ec7.json",
+					"jsonFile" : "target-BD-Debug-16173430fabf8ad5f760.json",
 					"name" : "BD",
 					"projectIndex" : 0
 				},

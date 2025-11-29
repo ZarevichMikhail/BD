@@ -311,7 +311,7 @@
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : [],
 	"MULTI_CONFIG" : false,
-	"PARALLEL" : 12,
+	"PARALLEL" : 2,
 	"PARSE_CACHE_FILE" : "/home/zarevichmikhail/QtProjects/BD/build/Desktop-Debug/CMakeFiles/BD_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "/usr/lib/qt6/libexec/moc",
 	"QT_UIC_EXECUTABLE" : "/usr/lib/qt6/libexec/uic",

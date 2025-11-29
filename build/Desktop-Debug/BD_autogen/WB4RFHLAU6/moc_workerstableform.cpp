@@ -26,7 +26,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 namespace {
 struct qt_meta_stringdata_WorkersTableForm_t {
-    uint offsetsAndSizes[26];
+    uint offsetsAndSizes[28];
     char stringdata0[17];
     char stringdata1[24];
     char stringdata2[1];
@@ -40,6 +40,7 @@ struct qt_meta_stringdata_WorkersTableForm_t {
     char stringdata10[28];
     char stringdata11[15];
     char stringdata12[7];
+    char stringdata13[25];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_WorkersTableForm_t::offsetsAndSizes) + ofs), len 
@@ -57,7 +58,8 @@ Q_CONSTINIT static const qt_meta_stringdata_WorkersTableForm_t qt_meta_stringdat
         QT_MOC_LITERAL(139, 22),  // "on_ResetButton_clicked"
         QT_MOC_LITERAL(162, 27),  // "on_ChangePostButton_clicked"
         QT_MOC_LITERAL(190, 14),  // "onPostSelected"
-        QT_MOC_LITERAL(205, 6)   // "postId"
+        QT_MOC_LITERAL(205, 6),  // "postId"
+        QT_MOC_LITERAL(212, 24)   // "onWorkerSelectionChanged"
     },
     "WorkersTableForm",
     "on_AddRowButton_clicked",
@@ -71,7 +73,8 @@ Q_CONSTINIT static const qt_meta_stringdata_WorkersTableForm_t qt_meta_stringdat
     "on_ResetButton_clicked",
     "on_ChangePostButton_clicked",
     "onPostSelected",
-    "postId"
+    "postId",
+    "onWorkerSelectionChanged"
 };
 #undef QT_MOC_LITERAL
 } // unnamed namespace
@@ -82,7 +85,7 @@ Q_CONSTINIT static const uint qt_meta_data_WorkersTableForm[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -90,13 +93,14 @@ Q_CONSTINIT static const uint qt_meta_data_WorkersTableForm[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   56,    2, 0x08,    1 /* Private */,
-       3,    0,   57,    2, 0x08,    2 /* Private */,
-       4,    2,   58,    2, 0x08,    3 /* Private */,
-       8,    0,   63,    2, 0x08,    6 /* Private */,
-       9,    0,   64,    2, 0x08,    7 /* Private */,
-      10,    0,   65,    2, 0x08,    8 /* Private */,
-      11,    1,   66,    2, 0x08,    9 /* Private */,
+       1,    0,   62,    2, 0x08,    1 /* Private */,
+       3,    0,   63,    2, 0x08,    2 /* Private */,
+       4,    2,   64,    2, 0x08,    3 /* Private */,
+       8,    0,   69,    2, 0x08,    6 /* Private */,
+       9,    0,   70,    2, 0x08,    7 /* Private */,
+      10,    0,   71,    2, 0x08,    8 /* Private */,
+      11,    1,   72,    2, 0x08,    9 /* Private */,
+      13,    2,   75,    2, 0x08,   11 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -106,6 +110,7 @@ Q_CONSTINIT static const uint qt_meta_data_WorkersTableForm[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   12,
+    QMetaType::Void, 0x80000000 | 5, 0x80000000 | 5,    6,    7,
 
        0        // eod
 };
@@ -135,7 +140,11 @@ Q_CONSTINIT const QMetaObject WorkersTableForm::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'onPostSelected'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<int, std::false_type>
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'onWorkerSelectionChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>
     >,
     nullptr
 } };
@@ -153,6 +162,7 @@ void WorkersTableForm::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 4: _t->on_ResetButton_clicked(); break;
         case 5: _t->on_ChangePostButton_clicked(); break;
         case 6: _t->onPostSelected((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 7: _t->onWorkerSelectionChanged((*reinterpret_cast< std::add_pointer_t<QModelIndex>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QModelIndex>>(_a[2]))); break;
         default: ;
         }
     }
@@ -177,13 +187,13 @@ int WorkersTableForm::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }

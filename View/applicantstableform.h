@@ -5,9 +5,20 @@
 #include <QSqlTableModel> //
 #include <QSqlError>
 
+
+#include <QSqlRelationalTableModel>
+#include <QSqlRelation>
+#include <QSqlRelationalDelegate>
+
+
+
+
+
+
 #include <QDebug> // Инструмент для отладки
 #include <QMessageBox> // Для показа сообщений об ошибках
 #include <QCloseEvent> // Для создания окна с подтверждением выхода
+
 
 namespace Ui {
 class ApplicantsTableForm;
@@ -37,7 +48,7 @@ private slots:
 private:
     Ui::ApplicantsTableForm *ui;
 
-    QSqlTableModel *model;
+    QSqlRelationalTableModel *model;
     static ApplicantsTableForm *ApplicantsForm;
 
 

@@ -16,8 +16,8 @@
   <widget class="QTableView" name="WorkersTableView">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>120</y>
+     <x>10</x>
+     <y>170</y>
      <width>731</width>
      <height>211</height>
     </rect>
@@ -52,8 +52,8 @@
   <widget class="QTableView" name="StudentsTableView">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>350</y>
+     <x>10</x>
+     <y>400</y>
      <width>731</width>
      <height>192</height>
     </rect>
@@ -132,6 +132,19 @@
    </property>
    <property name="text">
     <string>Поменять должность</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="IdAndNameLabel">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>130</y>
+     <width>181</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
    </property>
   </widget>
  </widget>

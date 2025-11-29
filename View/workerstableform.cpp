@@ -103,7 +103,9 @@ WorkersTableForm::WorkersTableForm(QWidget *parent)
     ui->StudentsTableView->setModel(ApplicantsDetailModel);
 
 
-
+    // --- ДОБАВЬТЕ ЭТОТ CONNECT ---
+    connect(ui->WorkersTableView->selectionModel(), &QItemSelectionModel::currentRowChanged,
+            this, &WorkersTableForm::onWorkerSelectionChanged);
 
 }
 
@@ -412,3 +414,46 @@ void WorkersTableForm::onPostSelected(int postId)
     //     model->revertAll();
     // }
 }
+
+
+void WorkersTableForm::onWorkerSelectionChanged(const QModelIndex &current, const QModelIndex &previous)
+{
+    Q_UNUSED(previous); // Нам не важно, с какой строки мы ушли
+
+    // 1. Проверка: выбрана ли строка?
+    if (!current.isValid()) {
+        ui->IdAndNameLabel->clear(); // Если ничего не выбрано, очищаем поле
+        return;
+    }
+
+    // 2. Получаем номер текущей строки
+    int currentRow = current.row();
+
+    // 3. Достаем данные из модели, используя имена столбцов
+    // QSqlRecord позволяет удобно брать данные по имени поля
+    QSqlRecord record = model->record(currentRow);
+
+    int id = record.value("ИД сотрудника").toInt();
+    QString name = record.value("ФИО").toString();
+
+
+    // 4. Формируем красивую строкуs
+    // Например: "Иванов Иван (ID: 5)"
+    QString text = QString("%1 ID: %2")
+                       .arg(name)
+                       .arg(id);
+
+    // 5. Записываем в LineEdit
+    ui->IdAndNameLabel->setText(text);
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,8 @@
 #include "applicantstableform.h"
 #include "ui_applicantstableform.h"
 #include "facultydelegate.h"
-
+#include "Services/workersdelegate.h"
+#include "workerstableform.h"
 
 ApplicantsTableForm *ApplicantsTableForm::ApplicantsForm= nullptr;
 
@@ -17,19 +18,53 @@ ApplicantsTableForm::ApplicantsTableForm(QWidget *parent)
     QSqlDatabase db = QSqlDatabase::database();
 
     // Создаем модель https://doc.qt.io/qt-6/qsqltablemodel.html
-    model = new QSqlTableModel(this, db);
+    //model = new QSqlTableModel(this, db);
+
+    // Указываем таблицу.
+    // "public" - это схема в PostgreSQL, "Должности" - имя таблицы.
+    // Кавычки нужны, т.к. имя на русском
+    //model->setTable("public.\"Абитуриенты\"");
+    //model->setTable("public.\"V_Абитуриенты_Конкусный_балл\""); // СТАЛО
+    // Populates the model with data from the table that was set via setTable()
+    //model->select();
+
+    // Настройка изменения данных в таблице
+    // All changes will be cached in the model until either submitAll() or revertAll() is called
+    //model->setEditStrategy(QSqlTableModel::EditStrategy::OnManualSubmit);
+
+
+    // Создаю qsqlrelationaltablemodel
+    // Создаем модель https://doc.qt.io/qt-6/qsqltablemodel.html
+    //model = new QSqlTableModel(this, db);
+    model = new QSqlRelationalTableModel(this, db);
+
 
     // Указываем таблицу.
     // "public" - это схема в PostgreSQL, "Должности" - имя таблицы.
     // Кавычки нужны, т.к. имя на русском
     model->setTable("public.\"Абитуриенты\"");
-    //model->setTable("public.\"V_Абитуриенты_Конкусный_балл\""); // СТАЛО
+
+
+    // 4. ОПИШИТЕ СВЯЗЬ (САМЫЙ ВАЖНЫЙ ШАГ!)
+    // Нам нужно найти индекс столбца "ИД_должности"
+    // int positionColumnIndex = model->fieldIndex("ИД сотрудника");
+
+
+    // // Теперь "объясняем" модели, что это за связь
+    // model->setRelation(positionColumnIndex,
+    //                    QSqlRelation("public.\"Сотрудники\"",     // Родительская таблица
+    //                                 "\"ИД сотрудника\"",         // Ее первичный ключ
+    //                                 "\"Серия паспорта\"")); // Столбец, который мы хотим ПОКАЗЫВАТЬ
+
+
     // Populates the model with data from the table that was set via setTable()
     model->select();
 
     // Настройка изменения данных в таблице
     // All changes will be cached in the model until either submitAll() or revertAll() is called
-    model->setEditStrategy(QSqlTableModel::EditStrategy::OnManualSubmit);
+    //model->setEditStrategy(QSqlTableModel::EditStrategy::OnManualSubmit);
+    model->setEditStrategy(QSqlRelationalTableModel::EditStrategy::OnManualSubmit);
+
 
     ui->ApplicantsTableView->setModel(model);
 

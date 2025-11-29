@@ -17,7 +17,7 @@
 // Замена QSqlTableModel
 #include <QSqlRelationalTableModel>
 #include <QSqlRelation>
-#include <QSqlRelationalDelegate> // Это тоже важно!
+#include <QSqlRelationalDelegate>
 
 
 
@@ -70,7 +70,9 @@ private slots:
     // Новый слот, который сработает, когда должность выбрана
     void onPostSelected(int postId);
 
-
+    // Для подстановочного поля
+    // Новый слот для отображения выбранного сотрудника
+    void onWorkerSelectionChanged(const QModelIndex &current, const QModelIndex &previous);
 
 
 

@@ -34,6 +34,7 @@ public:
     QPushButton *ResetButton;
     QCheckBox *FilterCheckBox;
     QPushButton *ChangePostButton;
+    QLabel *IdAndNameLabel;
 
     void setupUi(QWidget *WorkersTableForm)
     {
@@ -42,7 +43,7 @@ public:
         WorkersTableForm->resize(1075, 637);
         WorkersTableView = new QTableView(WorkersTableForm);
         WorkersTableView->setObjectName("WorkersTableView");
-        WorkersTableView->setGeometry(QRect(20, 120, 731, 211));
+        WorkersTableView->setGeometry(QRect(10, 170, 731, 211));
         AddRowButton = new QPushButton(WorkersTableForm);
         AddRowButton->setObjectName("AddRowButton");
         AddRowButton->setGeometry(QRect(30, 20, 121, 26));
@@ -51,7 +52,7 @@ public:
         DeleteRowButton->setGeometry(QRect(170, 20, 111, 26));
         StudentsTableView = new QTableView(WorkersTableForm);
         StudentsTableView->setObjectName("StudentsTableView");
-        StudentsTableView->setGeometry(QRect(20, 350, 731, 192));
+        StudentsTableView->setGeometry(QRect(10, 400, 731, 192));
         label = new QLabel(WorkersTableForm);
         label->setObjectName("label");
         label->setGeometry(QRect(40, 80, 51, 18));
@@ -70,6 +71,9 @@ public:
         ChangePostButton = new QPushButton(WorkersTableForm);
         ChangePostButton->setObjectName("ChangePostButton");
         ChangePostButton->setGeometry(QRect(390, 30, 161, 26));
+        IdAndNameLabel = new QLabel(WorkersTableForm);
+        IdAndNameLabel->setObjectName("IdAndNameLabel");
+        IdAndNameLabel->setGeometry(QRect(40, 130, 181, 18));
 
         retranslateUi(WorkersTableForm);
 
@@ -86,6 +90,7 @@ public:
         ResetButton->setText(QCoreApplication::translate("WorkersTableForm", "\320\241\320\261\321\200\320\276\321\201", nullptr));
         FilterCheckBox->setText(QCoreApplication::translate("WorkersTableForm", "\320\244\320\270\320\273\321\214\321\202\321\200", nullptr));
         ChangePostButton->setText(QCoreApplication::translate("WorkersTableForm", "\320\237\320\276\320\274\320\265\320\275\321\217\321\202\321\214 \320\264\320\276\320\273\320\266\320\275\320\276\321\201\321\202\321\214", nullptr));
+        IdAndNameLabel->setText(QCoreApplication::translate("WorkersTableForm", "TextLabel", nullptr));
     } // retranslateUi
 
 };

@@ -31,6 +31,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         View/facultydelegate.h View/facultydelegate.cpp
 
 
+
+
+
+
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET BD APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
