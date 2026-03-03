@@ -47,6 +47,8 @@ private slots:
 
     void on_action_Payments_triggered();
 
+    void on_SqlButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

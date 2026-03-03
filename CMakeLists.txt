@@ -29,6 +29,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         View/applicantstableform.h View/applicantstableform.cpp View/applicantstableform.ui
         View/paymentstableform.h View/paymentstableform.cpp View/paymentstableform.ui
         View/facultydelegate.h View/facultydelegate.cpp
+        View/sqlform.h View/sqlform.cpp View/sqlform.ui
+        View/exemplequery.h View/exemplequery.cpp View/exemplequery.ui
+        View/fullselect.h View/fullselect.cpp View/fullselect.ui
+        View/ncorrquery.h View/ncorrquery.cpp View/ncorrquery.ui
+        View/changerecordtab.h View/changerecordtab.cpp View/changerecordtab.ui
+
 
 
 

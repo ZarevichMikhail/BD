@@ -1,0 +1,96 @@
+#include "ncorrquery.h"
+#include "ui_ncorrquery.h"
+
+
+#include <QWidget>
+#include <QSqlQuery>
+#include <QSqlQueryModel>
+#include <QSqlError>
+#include <QMessageBox>
+
+#include <QDebug>
+
+
+
+
+
+
+NCorrQuery::NCorrQuery(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::NCorrQuery)
+{
+    ui->setupUi(this);
+}
+
+NCorrQuery::~NCorrQuery()
+{
+    delete ui;
+}
+
+void NCorrQuery::on_CreateSubqueryButton_clicked()
+{
+    QString SqlQuery = "";
+
+    // Некоррелированный запрос
+    // Показывает абитуриентов, у кого балл выше среднего
+    if (ui->UncorRadioButton->isChecked()) {
+        SqlQuery =   "SELECT "
+                    "\"Фамилия\", "
+                    "\"Конкурсный балл\", "
+                    "\"Первое направление подготовки\" "
+                "FROM "
+                    "public.\"Абитуриенты\" "
+
+                "WHERE "
+                    "\"Конкурсный балл\" > " 1
+                        "(SELECT AVG(\"Конкурсный балл\") "
+                            "FROM public.\"Абитуриенты\")";
+    }
+
+    // Коррелированный запрос
+    // Покаызвает абитуриентов сотрудника, у кого балл выше, чем средний по данному сотруднику.
+    // Показывает абитуриентов, у кого балл выше среднего
+    else if (ui->CorRadioButton->isChecked()) {
+
+        SqlQuery =   "SELECT "
+                    "T1.\"Номер заявления\", "
+                    "T1.\"Фамилия\", "
+                    "T1.\"Имя\", "
+                    "T1.\"Отчество\", "
+                    "T1.\"Конкурсный балл\", "
+                    "T1.\"ИД сотрудника\" "
+
+                "FROM "
+                    "public.\"Абитуриенты\" T1 "
+
+                "WHERE "
+
+                    "T1.\"Конкурсный балл\" > "
+                        "(SELECT AVG(T2.\"Конкурсный балл\") "
+                            " FROM "
+                                "public.\"Абитуриенты\" T2 "
+                            " WHERE "
+                                "T2.\"ИД сотрудника\" = T1.\"ИД сотрудника\")";
+    }
+    else {
+        QMessageBox::warning(this, "Ошибка", "Выберите тип подзапроса!");
+        return;
+    }
+
+    qDebug() << "Мой SQL запрос:" << SqlQuery;
+
+    // Выполнение и вывод
+    QSqlQuery query;
+    if (!query.exec(SqlQuery)) {
+        QMessageBox::critical(this, "Ошибка SQL", query.lastError().text());
+        return;
+    }
+
+    QSqlQueryModel *model = new QSqlQueryModel(this);
+    model->setQuery(std::move(query));
+
+    // ui->viewSub - это ваша таблица на вкладке подзапросов
+    ui->tableView->setModel(model);
+    ui->tableView->resizeColumnsToContents();
+}
+

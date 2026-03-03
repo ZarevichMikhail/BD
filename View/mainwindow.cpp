@@ -5,6 +5,8 @@
 #include "View/applicantstableform.h"
 #include "View/paymentstableform.h"
 #include "View/studentslistform.h"
+#include "View/sqlform.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -122,4 +124,9 @@ void MainWindow::on_action_StudentsList_triggered()
 
 
 
+
+void MainWindow::on_SqlButton_clicked()
+{
+    SQLForm::CreateWindow()->ShowForm();
+}
 

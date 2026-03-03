@@ -13,7 +13,21 @@
   <property name="windowTitle">
    <string>labdatabase</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="SqlButton">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>60</y>
+      <width>191</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Открыть окно с запросами</string>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -80,6 +94,11 @@
   <action name="action_Info">
    <property name="text">
     <string>О программе</string>
+   </property>
+  </action>
+  <action name="action_sql">
+   <property name="text">
+    <string>Запросы</string>
    </property>
   </action>
  </widget>

@@ -1,0 +1,218 @@
+#include "fullselect.h"
+#include "ui_fullselect.h"
+
+
+
+#include <QWidget>
+#include <QSqlQuery>
+#include <QSqlQueryModel>
+#include <QSqlError>
+#include <QMessageBox>
+
+#include <QDebug>
+
+
+FullSelect *FullSelect::Form = nullptr;
+FullSelect::FullSelect(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::FullSelect)
+{
+    ui->setupUi(this);
+}
+
+FullSelect::~FullSelect()
+{
+    Form = nullptr;
+    delete ui;
+}
+
+
+
+
+// Открывает окно при нажатии на кнопку
+FullSelect *FullSelect::CreateWindow()
+{
+
+    // Создаёт новое окно, если оно не открыто
+    if (Form == nullptr){
+
+        Form = new FullSelect();
+    }
+    return Form;
+
+}
+
+// "Активатор окна"
+void FullSelect::ShowForm()
+{
+    // Показывает окно
+    // если оно уже было открыто, ничего не делает
+    this->show();
+    // Поднимает его на передний план
+    this->activateWindow();
+
+}
+
+void FullSelect::on_CreateQueryButton_clicked()
+{
+
+
+    // Проверка фамилии
+    if (ui->WorkerNameTextBox->text().isEmpty()) {
+        QMessageBox::warning(this, "Внимание",
+                             "Укажите ФИО сотрудника.");
+        return;
+    }
+
+    // Проверка балла
+    if (ui->RatingFilterCheckBox->isChecked() && ui->RatingTextBox->text().isEmpty()) {
+        QMessageBox::warning(this, "Внимание", "Не указан балл в условии");
+        ui->RatingFilterCheckBox->setChecked(false);
+        return;
+    }
+
+    QString selectQuery = "";
+
+
+
+    // Все абитуриенты, которых принял этот сотрудник.
+    if (ui->NoFilterRadioButton->isChecked()) {
+        selectQuery =   "SELECT "
+                            "T1.\"ИД сотрудника\" ,"
+                            "T1.\"ФИО\" AS \"ФИО сотрудника\", "
+
+                            "COUNT(*) AS \"Количество принятых абитуриентов\", "
+                            "AVG(T2.\"Конкурсный балл\") AS \"Средний балл\" "
+
+
+                        "FROM "
+                            "public.\"Сотрудники\" T1 "
+
+                        "INNER JOIN "
+                            "public.\"Абитуриенты\" T2 ON T1.\"ИД сотрудника\" = T2.\"ИД сотрудника\" "
+
+                        "WHERE "
+                            "T1.\"ФИО\" ILIKE :name "
+
+                        "GROUP BY "
+                            "T1.\"ФИО\", T1.\"ИД сотрудника\"";
+    }
+    // Это потом убрать.
+    else if (ui->OnlyTomskRadioButton->isChecked()) {
+        // Аналог "По типам" -> Группируем по Сотруднику и Городу
+        selectQuery =   "SELECT "
+                            "T1.\"ФИО\", "
+                            "T2.\"Город\", "
+                      "COUNT(*) AS \"Количество\", "
+                      "CAST(AVG(T2.\"Конкурсный балл\") AS decimal(16,2)) AS \"Средний балл\" "
+                      "FROM public.\"Абитуриенты\" T2 "
+                      "JOIN public.\"Сотрудники\" T1 ON T2.\"ИД сотрудника\" = T1.\"ИД сотрудника\" "
+                      "WHERE T1.\"ФИО\" ILIKE :name AND T2.\"Город\" LIKE \"Томск\""
+                      "GROUP BY T1.\"ФИО\", T2.\"Город\"";
+    }
+    // Считает только тех, у кого первым 27.03.04
+    else if (ui->Only27RadioButton->isChecked()) {
+        // Аналог "По продажам" -> Группируем по Сотруднику и Специальности
+        selectQuery =   "SELECT "
+                            "T1.\"ИД сотрудника\" ,"
+                            "T1.\"ФИО\" AS \"ФИО сотрудника\", "
+                            "T2.\"Первое направление подготовки\", "
+
+                            "COUNT(*) AS \"Количество\", "
+                            "AVG(T2.\"Конкурсный балл\") AS \"Средний балл\" "
+
+                        "FROM "
+                            "public.\"Сотрудники\" T1 "
+
+                        "INNER JOIN "
+                            "public.\"Абитуриенты\" T2 ON T1.\"ИД сотрудника\" = T2.\"ИД сотрудника\" "
+
+                        "WHERE "
+                            "T1.\"ФИО\" ILIKE :name AND "
+                            "T2.\"Первое направление подготовки\" = '27.03.04' "
+
+                        "GROUP BY "
+                            "T1.\"ФИО\", T1.\"ИД сотрудника\", T2.\"Первое направление подготовки\"";
+    }
+
+
+
+    // Добавление условий на конкурсный балл
+    if (ui->RatingFilterCheckBox->isChecked()) {
+        selectQuery += " HAVING AVG(T2.\"Конкурсный балл\") > :amount";
+    }
+
+    // 
+    if (ui->DescendRatingCheckBox->isChecked()) {
+        selectQuery += " ORDER BY AVG(T2.\"Конкурсный балл\") DESC";
+    }
+
+    //
+    QSqlQuery query;
+    query.prepare(selectQuery);
+
+
+    // Нужно добавлять % к строке здесь, а не в запросе
+    query.bindValue(":name", ui->WorkerNameTextBox->text() + "%");
+    //query.bindValue(":cityName", "u" + "%");
+
+
+    if (ui->RatingFilterCheckBox->isChecked()) {
+        bool ok;
+        int amount = ui->RatingTextBox->text().toInt(&ok);
+
+        if (ok) {
+            query.bindValue(":amount", amount);
+        } else {
+            // Обработка ошибки парсинга числа (как catch в C#)
+                QMessageBox::critical(this, "Ошибка", "Балл в условии должен быть задан числом");
+            ui->RatingFilterCheckBox->setChecked(false);
+            return;
+        }
+    }
+
+    qDebug() << selectQuery;
+
+
+    if (!query.exec()) {
+        QMessageBox::critical(this, "Ошибка SQL", query.lastError().text());
+        return;
+    }
+
+    // Отображение в TableView
+    QSqlQueryModel *model = new QSqlQueryModel(this);
+    model->setQuery(std::move(query));
+
+    ui->tableView->setModel(model);
+    ui->tableView->resizeColumnsToContents();
+
+
+    if (model->rowCount() == 0) {
+        QMessageBox::information(this, "Информация", "Нет значений!");
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

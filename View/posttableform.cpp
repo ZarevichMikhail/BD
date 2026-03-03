@@ -59,11 +59,9 @@ PostTable::PostTable(QWidget *parent)
     ui->workersTable->setModel(detailModel);
 
 
-
-
-
-
 }
+
+
 
 PostTable::~PostTable()
 {
